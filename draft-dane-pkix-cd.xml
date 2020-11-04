@@ -150,7 +150,7 @@
     is not ubiquitous across the entire DNS namespace. For zones 
     which are not protected by DNSSEC, the CA certificate which can
     be used to verify the certificates presented by the TLSA records 
-    MUST be located at https://authority._device.DOMAIN/ca.pem. The 
+    MUST be located at https://authority.device.DOMAIN/ca.pem. The 
     TLS server certificate presetnted MUST be signed by a browser-recognized CA,
     The certificates in the ca.pem file do not need to 
     chain to a known CA. Trust is established in those certificates 
@@ -162,12 +162,12 @@
       shall be referred to as PKIX-CD, and shall use the DANE Certificate Usage
       value of 4, which indicates that the party requesting the certificate is 
       responsible for validating it using the ca.pem file stored at the 
-      known location https://authority._device.DOMAIN/ca.pem.
+      known location https://authority.device.DOMAIN/ca.pem.
       </t>
       <t>
     The ca.pem file must contain the CA certificate (or certificates) 
     which can be used to directly verify every certificate presented 
-    beneath _device.DOMAIN.
+    beneath device.DOMAIN.
       </t>
       <t>
     The certificates presented without the benefit of DNSSEC MUST 
