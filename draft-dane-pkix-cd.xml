@@ -115,10 +115,10 @@
           <li>example.net: organizational domain</li>
         </ul>
       <t>
-        The device identifier may consist of multiple labels, but for simplicity’s sake we will represent it here as only one label.
+        The device identifier MAY consist of multiple labels, but for simplicity’s sake we will represent it here as only one label.
       </t>
       <t>
-        The identity grouping label is the rightmost label prefixed by an underscore, to the left of the organizational domain. This does not need to be immediately adjacent to the organizational domain; labels may exist between the identity grouping label and the organizational domain. In the above example, this is _device. Another example might be abc123._messagesender.subdomain.example.net, where the identity grouping label would be _messagesender.
+        The identity grouping label is the rightmost label prefixed by an underscore, to the left of the organizational domain. This does not need to be immediately adjacent to the organizational domain; labels MAY exist between the identity grouping label and the organizational domain. In the above example, this is _device. Another example might be abc123._messagesender.subdomain.example.net, where the identity grouping label would be _messagesender.
       </t>
       <t>
         The organizational label(s) is any label existing between the identity grouping label and the organizational domain.
@@ -132,14 +132,14 @@
         In order to authenticate device certificates presented in TLSA records, without DNSSEC, we must safely obtain a signing certificate.
       </t>
       <t>
-        Using the components of the device name, together with the authorityKeyIdentifier found in the entity certificate (described in <xref target="RFC5280" />), we can compose the URL where the signing certificate should be found. 
+        Using the components of the device name, together with the authorityKeyIdentifier (AKI) found in the entity certificate (described in <xref target="RFC5280" />), we can compose the URL where the signing certificate should be found. 
       </t>
       <t>
         The process whereby the signing certificate URL can be constructed for a device named a1b2c3._device.environment.example.net is as follows:
       </t>
         <ol>
           <li>Perform a DNS query for a1b2c3._device.environment.example.net rrtype==TLSA.</li>
-          <li>Extract the authorityKeyIdentifier from the certificate. We will use AA-BB-CC as the placeholder in this example.</li>
+          <li>Extract the AKI from the certificate. We will use AA-BB-CC as the placeholder in this example.</li>
           <li>Identify the organizational domain: example.net</li>
           <li>Identify any organizational labels: environment</li>
           <li>Identify the identity grouping label, and remove the underscore prefix: device</li>
@@ -147,17 +147,17 @@
           <li>Adding HTTPS and the AKI, build the URL: https://authority.device.environment.example.net/ca/AA-BB-CC.pem</li>
         </ol>
       <t>
-        The file found at the URL must present exactly one PEM-encoded CA certificate. The web server presenting the file must use TLS with a certificate that can be validated to the TLS client’s client root certificate store, if DANE is not used for the server’s identity. The certificate in the PEM file does not need to chain to the TLS client’s root certificate store. 
+        The file found at the URL MUST present exactly one PEM-encoded CA certificate. The HTTPS server presenting the file MUST use TLS with a certificate that can be validated to the TLS client’s client root certificate store, if DANE is not used for the server’s identity. The certificate in the PEM file does not need to chain to the TLS client’s root certificate store. 
       </t>
       <t>
-        A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://authority.device.environment.example.net/ca/AA-BB-CC.pem may be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
+        A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://authority.device.environment.example.net/ca/AA-BB-CC.pem MAY be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
       </t>
       <t>
       Benefits of this approach:
       </t>
         <ul>
           <li>
-        This method uses a web server as a content-addressable storage mechanism for public keys in CA certificates. The web server may host any number of CA certificates, and the web server does not need to provide any directory listing service. This makes the full set of CA certificates only discoverable by knowing an identity's AKI, and the entire CA bundle for the zone is not required to be distributable as a bundle.
+        This method uses an HTTPS server as a content-addressable storage mechanism for public keys in CA certificates. The HTTPS server MAY host any number of CA certificates, and the HTTPS server does not need to provide any directory listing service. This makes the full set of CA certificates only discoverable by knowing an identity's AKI, and the entire CA bundle for the zone is not required to be distributable as a bundle.
           </li>
           <li>
         Device identities exist in a zone apart from other identities, which may have granular management access controls applied.
@@ -169,10 +169,10 @@
     </section>
   </section>
   <section anchor="dane_update" title="Update to DANE" numbered="true" toc="default">
-    <t>The method of certificate discovery via TLSA records, without DNSSEC, shall be referred to as PKIX-CD, and shall use the DANE Certificate Usage value of 4. The presence of the certificate usage value 4 indicates that the party requesting the certificate is responsible for validating it using the CA certificate located at the authority URL, which may be composed using the process described above.</t>
+    <t>The method of certificate discovery via TLSA records, without DNSSEC, SHALL be referred to as PKIX-CD, and shall use the DANE Certificate Usage value of 4. The presence of the certificate usage value 4 indicates that the party requesting the certificate is responsible for validating it using the CA certificate located at the authority URL, which can be composed using the process described above.</t>
   </section>
   <section anchor="pkix_constraints" title="PKIX Constraints" numbered="true" toc="default">
-    <t>The certificates presented with PKIX-CD must contain the subjectAlternativeName OID, with at least one dNSName which matches the DNS name used to retrieve the certificate. A certificate which is delivered without the benefit of DNSSEC, even if the CA's signature is valid, MUST not be trusted without alignment between the DNS name used to retrieve the certificate and one DNSName attribute within the certificate. The SubjectAlternativeName field may have other entries in addition to the one which aligns with the DNS name where the certificate can be discovered.</t>
+    <t>The certificates presented with PKIX-CD MUST contain the subjectAlternativeName OID, with at least one dNSName which matches the DNS name used to retrieve the certificate. A certificate which is delivered without the benefit of DNSSEC, even if the CA's signature is valid, MUST not be trusted without alignment between the DNS name used to retrieve the certificate and one DNSName attribute within the certificate. The SubjectAlternativeName field MAY have other entries in addition to the one which aligns with the DNS name where the certificate can be discovered.</t>
   </section>
   <section anchor="caveats" title="Caveats" numbered="true" toc="default">
   <t>
