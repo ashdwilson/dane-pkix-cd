@@ -84,6 +84,9 @@
       </t>
     </section>
   </section>
+  <section anchor="terms" title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this memo are to be interpreted as described in <xref target="RFC2119" />.</t>
+  </section>
   <section anchor="auth_model" title="Authentication Model" numbered="true" toc="default">
     <section anchor="obj_sign_encrypt" title="Object Signing And Encryption" numbered="true" toc="default">
       <t>
@@ -202,6 +205,7 @@
   <name>References</name>
   <references>
     <name>Normative References</name>
+    <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6698.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7671.xml" />
