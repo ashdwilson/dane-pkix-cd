@@ -174,7 +174,15 @@
   <section anchor="pkix_constraints" title="PKIX Constraints" numbered="true" toc="default">
     <t>The certificates presented with PKIX-CD MUST contain the subjectAlternativeName OID, with at least one dNSName which matches the DNS name used to retrieve the certificate. A certificate which is delivered without the benefit of DNSSEC, even if the CA's signature is valid, MUST not be trusted without alignment between the DNS name used to retrieve the certificate and one DNSName attribute within the certificate. The SubjectAlternativeName field MAY have other entries in addition to the one which aligns with the DNS name where the certificate can be discovered.</t>
   </section>
-  <section anchor="caveats" title="Caveats" numbered="true" toc="default">
+<section anchor="IANA" numbered="true" toc="default">
+  <name>IANA Considerations</name>
+  <t>This document includes no request to IANA.</t>
+</section>
+
+<section anchor="security" title="Security Considerations" numbered="true" toc="default">
+  <t>
+  This document updates RFC 6698 by defining the use of the TLSA record for discovering client TLS certificates and associated CA certificates. However, the security model presented here is quite different than the security model presented in RFC 6698. RFC 6698 relies on DNSSEC as the public key infrastructure (PKI) used for validating certificates (or certificate metadata) presented via TLSA resource records in DNS. This draft proposes the use of Web PKI as the root of trust, in the event the zone presenting TLSA records for this use case is not protected by DNSSEC. Web PKI's root of trust is in the browser CA bundle, and the substitution of Web PKI for the DNSSEC PKI trades the security implications of DNSSEC for Web PKI.
+  </t>
   <t>
     Because PKIX-CD can provide an avenue for certificate chain discovery, care must be taken to ensure that identities are authenticated via the correct chain. There may be a desire to locally cache all discovered CA certificates into a general certificate store. This must not happen without certain controls in place. Without the identity consumer (authenticator) ensuring that the signing certificate for a particular zone is only used to verify certificates ONLY from that particular zone, cross-domain impersonation (is this a cousin of the confused deputy problem?) may be possible. An example of this is an application where example.com and example.net both present identities via PKIX-CD. If the CA certificates from example.com and example.net are loaded into a local certificate store and used for authenticating certificates from both zones, then devices under example.com may be deemed authentic even if signed by example.net.
     </t>
@@ -182,22 +190,6 @@
     If CA certificate discovery is used to facilitate traditional PKI authentication with TLS, care MUST be taken to ensure that the CA certificates cached by the authenticator contain unique distinguishedName values. The process proposed here recommends CA certificate discovery by mapping the the authorityKeyID in the certificate to the subjectKeyIdentifier in the CA certificate. TLS 1.3 (<xref target="RFC8446" />, section 4.2.4) specifies the use of the distinguishedName attribute, rather than the hash of the CA's public key, for conveying suppported CAs for mutual authentication.
   </t>
   </section>
-
-<section anchor="IANA" numbered="true" toc="default">
-  <name>IANA Considerations</name>
-  <t>This document includes no request to IANA.</t>
-</section>
-
-<section anchor="Security" numbered="true" toc="default">
-  <name>Security Considerations</name>
-  <t>
-	This document updates RFC 6698 by defining the use of the TLSA
-        record for client TLS certificates. There are no security
-        considerations for this document beyond those described
-	in RFC 6698 and RFC 7671 and in the specifications for TLS and
-        DTLS [RFC8446], [RFC5246], [RFC6347].
-  </t>
-</section>
 
 </middle>
 
