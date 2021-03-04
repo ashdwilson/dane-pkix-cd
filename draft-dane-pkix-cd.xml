@@ -152,14 +152,14 @@
           <li>Identify the organizational domain: example.net</li>
           <li>Identify any organizational labels: environment</li>
           <li>Identify the identity grouping label, and remove the underscore prefix: device</li>
-          <li>Using the following pattern, create the hostname: authority.${IDENTITY_GROUPING_LABEL}.${ORGANIZATIONAL_LABELS}.${ORGANIZATIONAL_DOMAIN}: authority.device.environment.example.net</li>
-          <li>Adding HTTPS and the AKI, build the URL: https://authority.device.environment.example.net/ca/AA-BB-CC.pem</li>
+          <li>Using the following pattern, create the hostname: ${IDENTITY_GROUPING_LABEL}.${ORGANIZATIONAL_LABELS}.${ORGANIZATIONAL_DOMAIN}: device.environment.example.net</li>
+          <li>Adding HTTPS and the AKI, build the authority URI: https://device.environment.example.net/.well-known/ca/AA-BB-CC.pem</li>
         </ol>
       <t>
         The file found at the URL MUST contain exactly one PEM-encoded CA certificate. The HTTPS server presenting the file MUST use TLS with a certificate that can be validated to the TLS client’s client root certificate store, if DANE is not used for the server’s identity. The certificate in the PEM file does not need to chain to the TLS client’s root certificate store. 
       </t>
       <t>
-        A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://authority.device.environment.example.net/ca/AA-BB-CC.pem MAY be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
+        A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://device.environment.example.net/.well-known/ca/AA-BB-CC.pem MAY be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
       </t>
       <t>
       Benefits of this approach:
