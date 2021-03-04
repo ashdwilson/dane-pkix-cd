@@ -96,6 +96,11 @@
       Likewise, an entity which can receive messages encrypted using a public key (aither directly, or by way of a key-wrapping technique) has a DNS-based identity where a public key suitable for message encryption can be found.
       </t>
     </section>
+    <section anchor="trust_anchors" title="Trust Anchors" numbered="true" toc="default">
+      <t>
+      A PKIX-CD identity has a discoverable certificate and trust anchor. The trust anchor MAY be used by a TLS server to populate a local certificate store for the purpose of enabling traditional PKI-based mutual TLS. This approach comes with constraints and caveats, as described in <xref target="security">Security</xref>, below. The use of PKIX-CD for enabling mutual TLS is a wrapper for PKI-based mutual authentication, and does not change the way that TLS operates. This approach provides a transitional state from PKIX-based DANE to DNSSEC-based DANE for mutual TLS authentication. Trust anchor discovery MAY happen on-the-fly within the TLS handshake only when using DNSSEC-based DANE.
+      </t>
+    </section>
     <section anchor="trust_model" title="Trust Model For DNS-Based Identities" numbered="true" toc="default">
       <t>
 	    DNSSEC SHOULD be used to ensure the integrity of the certificate presented via the TLSA record. For a variety of reasons, DNSSEC is not ubiquitous across the entire DNS namespace. For zones which are not protected by DNSSEC, the CA certificate which can be used to verify the certificates presented by the TLSA records MUST be retrieved from a known location derived from the identity’s full DNS name.
@@ -151,7 +156,7 @@
           <li>Adding HTTPS and the AKI, build the URL: https://authority.device.environment.example.net/ca/AA-BB-CC.pem</li>
         </ol>
       <t>
-        The file found at the URL MUST present exactly one PEM-encoded CA certificate. The HTTPS server presenting the file MUST use TLS with a certificate that can be validated to the TLS client’s client root certificate store, if DANE is not used for the server’s identity. The certificate in the PEM file does not need to chain to the TLS client’s root certificate store. 
+        The file found at the URL MUST contain exactly one PEM-encoded CA certificate. The HTTPS server presenting the file MUST use TLS with a certificate that can be validated to the TLS client’s client root certificate store, if DANE is not used for the server’s identity. The certificate in the PEM file does not need to chain to the TLS client’s root certificate store. 
       </t>
       <t>
         A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://authority.device.environment.example.net/ca/AA-BB-CC.pem MAY be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
