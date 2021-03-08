@@ -48,7 +48,7 @@
         <email>shuque@gmail.com</email>
       </address>
     </author>
-    <date day="26" month="February" year="2021" />
+    <date day="03" month="March" year="2021" />
     <area>Security</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -62,9 +62,7 @@
 
     <abstract>
       <t>
-        The DANE TLSA protocol <xref target="RFC6698" format="default" />
-      <xref target="RFC7671" format="default" />
- describes how to publish Transport Layer Security (TLS) server certificates or public keys in the DNS. This document updates RFC 6698 and RFC 7671. It describes how to use the TLSA record to enable certificate discovery for object security use cases, and how to use PKIX validation for TLSA records queried without the benefit of DNSSEC.
+        The DNS-Based Authentication of Named Entities (DANE) TLSA specification <xref target="RFC6698" format="default" /> and The DNS-Based Authentication of Named Entities (DANE) Protocol: Updates and Operational Guidance <xref target="RFC7671" format="default" /> describe how to publish Transport Layer Security (TLS) server certificates or public keys in the DNS. This document updates <xref target="RFC6698" /> and <xref target="RFC7671" />. It describes how to use the TLSA record to enable entity and CA certificate discovery for object security and trust chain discovery use cases, and how to use PKIX validation for TLSA records queried without the benefit of DNSSEC.
     </t>
   </abstract>
 
@@ -85,7 +83,7 @@
     </section>
   </section>
   <section anchor="terms" title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this memo are to be interpreted as described in <xref target="RFC2119" />.</t>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119" /> <xref target="RFC8174" /> when, and only when, they appear in all capitals, as shown here.</t>
   </section>
   <section anchor="auth_model" title="Authentication Model" numbered="true" toc="default">
     <section anchor="obj_sign_encrypt" title="Object Signing And Encryption" numbered="true" toc="default">
@@ -181,7 +179,7 @@
     <t>The method of certificate discovery via TLSA records, without DNSSEC, SHALL be referred to as PKIX-CD, and shall use the DANE Certificate Usage value of 4. The presence of the certificate usage value 4 indicates that the party requesting the certificate is responsible for validating it using the CA certificate located at the authority URL, which can be composed using the process described above.</t>
   </section>
   <section anchor="pkix_constraints" title="PKIX Constraints" numbered="true" toc="default">
-    <t>The certificates presented with PKIX-CD MUST contain the subjectAlternativeName OID, with at least one dNSName which matches the DNS name used to retrieve the certificate. A certificate which is delivered without the benefit of DNSSEC, even if the CA's signature is valid, MUST not be trusted without alignment between the DNS name used to retrieve the certificate and one DNSName attribute within the certificate. The SubjectAlternativeName field MAY have other entries in addition to the one which aligns with the DNS name where the certificate can be discovered.</t>
+    <t>The certificates presented with PKIX-CD MUST contain the subjectAlternativeName OID, with at least one dNSName which matches the DNS name used to retrieve the certificate. A certificate which is delivered without the benefit of DNSSEC, even if the CA's signature is valid, MUST NOT be trusted without alignment between the DNS name used to retrieve the certificate and one DNSName attribute within the certificate. The SubjectAlternativeName field MAY have other entries in addition to the one which aligns with the DNS name where the certificate can be discovered.</t>
   </section>
 <section anchor="IANA" numbered="true" toc="default">
   <name>IANA Considerations</name>
@@ -213,6 +211,7 @@
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6698.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7671.xml" />
+    <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml" />
     <xi:include href="https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml" />
     <reference anchor="TLSCLIENTID" target="https://tools.ietf.org/html/draft-huque-tls-dane-clientid">
       <front>
