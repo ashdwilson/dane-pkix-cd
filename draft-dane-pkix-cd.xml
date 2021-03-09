@@ -28,14 +28,14 @@
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-dane-pkix-cd-00" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-wilson-dane-pkix-cd-00" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 
   <!-- ***** FRONT MATTER ***** -->
 
   <front>
 
     <title abbrev="DANE PKIX Certificate Discovery">PKI-Authenticated Certificate Discovery Using DANE TLSA records</title>
-    <seriesInfo name="Internet-Draft" value="draft-dane-pkix-cd-00" />
+    <seriesInfo name="Internet-Draft" value="draft-wilson-dane-pkix-cd-00" />
     <author fullname="Ash Wilson" initials="A." surname="Wilson">
       <organization>Valimail</organization>
       <address>
