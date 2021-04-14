@@ -28,7 +28,7 @@
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-wilson-dane-pkix-cd-00" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-wilson-dane-pkix-cd-01" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -48,7 +48,7 @@
         <email>shuque@gmail.com</email>
       </address>
     </author>
-    <date day="08" month="March" year="2021" />
+    <date day="14" month="April" year="2021" />
     <area>Security</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -183,7 +183,23 @@
   </section>
 <section anchor="IANA" numbered="true" toc="default">
   <name>IANA Considerations</name>
-  <t>This document includes no request to IANA.</t>
+  <t>This draft updates the TLSA Certificate Usages registry maintained at https://www.iana.org/assignments/dane-parameters/dane-parameters.xhtml#certificate-usages to add the following value:</t>
+  <table>
+    <tbody>
+      <tr>
+        <td>Value</td>
+        <td>Acronym</td>
+        <td>Short Description</td>
+        <td>Reference</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>PKIXCD</td>
+        <td>PKI-Auth Cert Discovery</td>
+        <td><xref target="PKIXCD" format="default" /></td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <section anchor="security" title="Security Considerations" numbered="true" toc="default">
@@ -214,6 +230,13 @@
         <title>TLS Extension for DANE Client Identity</title>
         <author fullname="Shumon Huque" initials="S" surname="Huque" />
         <author fullname="Viktor Dukhovni" initials="V" surname="Dukhovni" />
+      </front>
+    </reference>
+    <reference anchor="PKIXCD" target="https://tools.ietf.org/html/draft-wilson-dane-pkix-cd">
+      <front>
+        <title>DANE PKIX Certificate Discovery</title>
+        <author fullname="Ash Wilson" initials="A" surname="Wilson" />
+        <author fullname="Shumon Huque" initials="S" surname="Huque" />
       </front>
     </reference>
   </references>
