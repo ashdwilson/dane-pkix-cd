@@ -28,7 +28,7 @@
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-wilson-dane-pkix-cd-01" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="std" consensus="true" docName="draft-wilson-dane-pkix-cd-02" ipr="trust200902" updates="6698,7671" obsoletes="" submissionType="IETF" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -48,7 +48,7 @@
         <email>shuque@gmail.com</email>
       </address>
     </author>
-    <date day="14" month="April" year="2021" />
+    <date day="19" month="August" year="2021" />
     <area>Security</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -139,7 +139,7 @@
         In order to authenticate device certificates presented in TLSA records, without DNSSEC, we must safely obtain a CA certificate which can be used to verify the entity certificate.
       </t>
       <t>
-        Using the components of the device name, together with the authorityKeyIdentifier (AKI) found in the entity certificate (described in <xref target="RFC5280" />), we can compose the URL where the signing certificate should be found. 
+        Using the components of the device name, together with the authorityKeyIdentifier (AKI) found in the entity certificate (described in <xref target="RFC5280" />), we can compose the URL where the signing certificate can be found. 
       </t>
       <t>
         The process whereby the signing certificate URL can be constructed for a device named a1b2c3._device.environment.example.net is as follows:
