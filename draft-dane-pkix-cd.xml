@@ -48,7 +48,7 @@
         <email>shuque@gmail.com</email>
       </address>
     </author>
-    <date day="19" month="August" year="2021" />
+    <date day="13" month="September" year="2021" />
     <area>Security</area>
     <workgroup>Internet Engineering Task Force</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -73,7 +73,7 @@
   <section anchor="intro" title="Background and Motivation" numbered="true" toc="default">
     <section anchor="background" title="Background" numbered="true" toc="default">
       <t>
-        A digital identity consists of at least two essential elements: a name, and a method for proving ownership of the name. Digital identities are often represented using <xref target="RFC5280" format="default">X.509 certificates</xref>, which bind a name to a public key under a certificate authority's signature. This allows all entities which trust the certificate authority to trust that the public key associated with the name in the certificate is authentic and unaltered. The public key may be used for authentication, in the establishment of a secure session between two entities using a protocol like TLS or DTLS. The public key in the certificate may also be used to provide object security mechanisms like cryptographic signature verification or payload encryption. The certificate discovery process for object security usually relies on either in-band transmission of the certificate by the sender (IEEE 802.11p DSRC), or out-of-band via a proprietary API presented by the certificate authority.
+        A digital identity consists of at least two essential elements: a name, and a method for proving ownership of the name. Digital identities are often represented using <xref target="RFC5280" format="default">X.509 certificates</xref>, which bind a name to a public key under a certification authority's signature. This allows all entities which trust the certification authority to trust that the public key associated with the name in the certificate is authentic and unaltered. The public key may be used for authentication, in the establishment of a secure session between two entities using a protocol like TLS or DTLS. The public key in the certificate may also be used to provide object security mechanisms like cryptographic signature verification or payload encryption. The certificate discovery process for object security usually relies on either in-band transmission of the certificate by the sender (IEEE 802.11p DSRC), or out-of-band via a proprietary API presented by the certification authority.
       </t>
     </section>
     <section anchor="motivation" title="Motivation" numbered="true" toc="default">
@@ -158,6 +158,9 @@
       </t>
       <t>
         A PEM-encoded certificate being presented by a server possessing a DANE or Web PKI-validated identity is sufficient to indicate the trustworthiness of the CA certificate for validating certificates presented for associated identities. In this example, the certificate found at https://device.environment.organization.example/.well-known/ca/AA-BB-CC.pem MAY be cached and used to validate PKIX-CD certificates with identities matching *._device.environment.example.net, if the certificates contain AKI AA-BB-CC.
+      </t>
+      <t>
+        The chain of trust from signing certificate to root certificate may be discovered using the authorityInfoAccess (<xref target="RFC5280" /> section 4.2.2.1) extension within the certificate, or by substituting the authorityKeyIdentifier in the signing certificate for the AKI in the authority URI, and querying the updated authority URI. This process may be repeated to retrieve the entire trust chain, the root certificate of which is useful for enabling certificate-based authentication for TLS clients.
       </t>
       <t>
       Benefits of this approach:
